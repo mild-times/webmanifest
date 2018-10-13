@@ -1,0 +1,13 @@
+[package]
+name = "webmanifest"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/chooxide/webmanifest"
+documentation = "https://docs.rs/webmanifest"
+description = "Create a manifest.webmanifest file"
+authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
+readme = "README.md"
+
+[dependencies]
+
+[dev-dependencies]
