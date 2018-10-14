@@ -202,7 +202,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   #[must_use]
   #[inline]
   pub fn short_name(mut self, val: &'s str) -> Self {
-    debug_assert!(val.len() < 12);
+    debug_assert!(val.len() <= 12);
     self.short_name = Some(val);
     self
   }
