@@ -112,7 +112,7 @@ pub struct Manifest<'s, 'i, 'r> {
   short_name: Option<&'s str>,
   start_url: Option<&'s str>,
   #[serde(rename = "display")]
-  display_mode: Option<DisplayMode>,
+  display_mode: DisplayMode,
   background_color: Option<&'s str>,
   theme_color: Option<&'s str>,
   description: Option<&'s str>,
@@ -138,7 +138,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
       short_name: None,
       description: None,
       start_url: None,
-      display_mode: None,
+      display_mode: DisplayMode::Browser,
       background_color: None,
       theme_color: None,
       icons: vec![],
@@ -247,7 +247,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   #[must_use]
   #[inline]
   pub fn display_mode(mut self, val: DisplayMode) -> Self {
-    self.display_mode = Some(val);
+    self.display_mode = val;
     self
   }
 
