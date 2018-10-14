@@ -259,13 +259,13 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
   /// let manifest = Manifest::builder(name)
-  ///   .background_color("#000")
+  ///   .bg_color("#000")
   ///   .build()?;
   /// # Ok(())}
   /// ```
   #[must_use]
   #[inline]
-  pub fn background_color(mut self, val: &'s str) -> Self {
+  pub fn bg_color(mut self, val: &'s str) -> Self {
     self.background_color = Some(val);
     self
   }

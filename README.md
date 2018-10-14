@@ -21,7 +21,7 @@ fn main() -> Result<(), failure::Error> {
   let url = "https://play.google.com/store/apps/details?id=cheeaun.hackerweb";
   let manifest = Manifest::builder(name)
     .short_name("my app")
-    .background_color("#000")
+    .bg_color("#000")
     .related(&Related::new("play", url))
     .build()?;
   Ok(())
