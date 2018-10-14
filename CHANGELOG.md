@@ -1,3 +1,18 @@
+## 2018-10-14, Version 0.2.4
+### Commits
+- [[`c86abab6e1`](https://github.com/chooxide/webmanifest/commit/c86abab6e101f9577717f030d7bd319cb833e51f)] (cargo-release) version 0.2.4 (Yoshua Wuyts)
+- [[`cd1e4231f5`](https://github.com/chooxide/webmanifest/commit/cd1e4231f5a02c13a20e10bcb41ea1eec2129648)] simplify the mime guess logic (Yoshua Wuyts)
+- [[`c668c3836e`](https://github.com/chooxide/webmanifest/commit/c668c3836e07fb668e2f09e9d0926c78ef60e04f)] Update changelog (Yoshua Wuyts)
+
+### Stats
+```diff
+ CHANGELOG.md | 15 +++++++++++++++
+ Cargo.toml   |  2 +-
+ src/lib.rs   |  9 +--------
+ 3 files changed, 17 insertions(+), 9 deletions(-)
+```
+
+
 ## 2018-10-14, Version 0.2.3
 ### Commits
 - [[`670ae0f408`](https://github.com/chooxide/webmanifest/commit/670ae0f4083fad7069170e7d1cadf105fbe1de98)] (cargo-release) version 0.2.3 (Yoshua Wuyts)
