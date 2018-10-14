@@ -48,7 +48,11 @@ pub struct Manifest<'s, 'i, 'r> {
   #[serde(skip_serializing_if = "Option::is_none")]
   lang: Option<&'s str>,
   #[serde(skip_serializing_if = "Option::is_none")]
+  scope: Option<&'s str>,
+  #[serde(skip_serializing_if = "Option::is_none")]
   theme_color: Option<&'s str>,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  prefer_related_applications: Option<bool>,
   icons: Vec<&'i Icon<'i>>,
   related_applications: Vec<&'r Related<'r>>,
 }
@@ -77,6 +81,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
       lang: None,
       background_color: None,
       theme_color: None,
+      scope: None,
+      prefer_related_applications: None,
       icons: vec![],
       related_applications: vec![],
     }
@@ -325,6 +331,64 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   #[inline]
   pub fn direction(mut self, val: Direction) -> Self {
     self.direction = Some(val);
+    self
+  }
+
+  /// Set the `prefer_related_applications` value.
+  ///
+  /// Specifies a boolean value that hints for the user agent to indicate to the
+  /// user that the specified native applications are recommended over the
+  /// website. This should only be used if the related native apps really do
+  /// offer something that the website can't.
+  ///
+  /// ## Note
+  /// If omitted, the value defaults to `false`.
+  ///
+  /// ## Example
+  /// ```rust
+  /// # extern crate webmanifest;
+  /// # extern crate failure;
+  /// # use webmanifest::{Manifest, Direction};
+  /// # fn main() -> Result<(), failure::Error> {
+  /// let name = "My Cool Application";
+  /// let manifest = Manifest::builder(name)
+  ///   .prefer_related_applications(true)
+  ///   .build()?;
+  /// # Ok(())}
+  /// ```
+  #[must_use]
+  #[inline]
+  pub fn prefer_related_applications(mut self, val: bool) -> Self {
+    self.prefer_related_applications = Some(val);
+    self
+  }
+
+  /// Set the `scope` value.
+  ///
+  /// Defines the navigation scope of this website's context. This restricts
+  /// what web pages can be viewed while the manifest is applied. If the user
+  /// navigates outside the scope, it returns to a normal web page inside a
+  /// browser tab/window.
+  ///
+  /// If the scope is a relative URL, the base URL will be the URL of the
+  /// manifest.
+  ///
+  /// ## Example
+  /// ```rust
+  /// # extern crate webmanifest;
+  /// # extern crate failure;
+  /// # use webmanifest::{Manifest, Direction};
+  /// # fn main() -> Result<(), failure::Error> {
+  /// let name = "My Cool Application";
+  /// let manifest = Manifest::builder(name)
+  ///   .scope("/myapp/")
+  ///   .build()?;
+  /// # Ok(())}
+  /// ```
+  #[must_use]
+  #[inline]
+  pub fn scope(mut self, val: &'s str) -> Self {
+    self.scope = Some(val);
     self
   }
 
