@@ -12,6 +12,8 @@ extern crate serde_json;
 extern crate serde_derive;
 
 use failure::Error;
+use std::ffi::OsStr;
+use std::path::Path;
 
 /// Defines the developers’ preferred display mode for the website.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -89,7 +91,11 @@ impl<'s> Icon<'s> {
   #[must_use]
   #[inline]
   pub fn new(src: &'s str, sizes: &'s str) -> Self {
-    let mime_type = mime_guess::get_mime_type(&src);
+    let ext = Path::new(src)
+      .extension()
+      .and_then(OsStr::to_str)
+      .unwrap_or("");
+    let mime_type = mime_guess::get_mime_type(&ext);
     let icon_type = format!("{}/{}", mime_type.type_(), mime_type.subtype());
     Self {
       src,
@@ -154,6 +160,25 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   #[inline]
   pub fn build(self) -> Result<String, Error> {
     let manifest = serde_json::to_string(&self)?;
+    Ok(manifest)
+  }
+
+  /// Finalize the builder and create a pretty representation of the manifest.
+  ///
+  /// ## Example
+  /// ```rust
+  /// # extern crate webmanifest;
+  /// # extern crate failure;
+  /// # use webmanifest::Manifest;
+  /// # fn main() -> Result<(), failure::Error> {
+  /// let name = "My Cool Application";
+  /// let manifest = Manifest::builder(name).pretty()?;
+  /// # Ok(())}
+  /// ```
+  #[must_use]
+  #[inline]
+  pub fn pretty(self) -> Result<String, Error> {
+    let manifest = serde_json::to_string_pretty(&self)?;
     Ok(manifest)
   }
 
