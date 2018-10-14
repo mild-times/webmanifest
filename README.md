@@ -45,7 +45,7 @@ look at some of these issues:
 - [Issues labeled "help wanted"][help-wanted]
 
 ## References
-None.
+- https://developer.mozilla.org/en-US/docs/Web/Manifest
 
 ## License
 [MIT](./LICENSE-MIT) OR [Apache-2.0](./LICENSE-APACHE)
