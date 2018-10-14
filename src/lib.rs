@@ -102,12 +102,18 @@ impl<'s> Icon<'s> {
 #[derive(Debug, Clone, Serialize)]
 pub struct Manifest<'s, 'i, 'r> {
   name: &'s str,
+  #[serde(skip_serializing_if = "Option::is_none")]
   short_name: Option<&'s str>,
+  #[serde(skip_serializing_if = "Option::is_none")]
   start_url: Option<&'s str>,
+  #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(rename = "display")]
-  display_mode: DisplayMode,
+  display_mode: Option<DisplayMode>,
+  #[serde(skip_serializing_if = "Option::is_none")]
   background_color: Option<&'s str>,
+  #[serde(skip_serializing_if = "Option::is_none")]
   theme_color: Option<&'s str>,
+  #[serde(skip_serializing_if = "Option::is_none")]
   description: Option<&'s str>,
   icons: Vec<&'i Icon<'i>>,
   related_applications: Vec<&'r Related<'r>>,
@@ -131,7 +137,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
       short_name: None,
       description: None,
       start_url: None,
-      display_mode: DisplayMode::Browser,
+      display_mode: None,
       background_color: None,
       theme_color: None,
       icons: vec![],
@@ -240,7 +246,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   #[must_use]
   #[inline]
   pub fn display_mode(mut self, val: DisplayMode) -> Self {
-    self.display_mode = val;
+    self.display_mode = Some(val);
     self
   }
 
