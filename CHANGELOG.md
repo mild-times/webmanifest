@@ -1,3 +1,18 @@
+## 2018-10-14, Version 0.2.2
+### Commits
+- [[`beb35e1dd6`](https://github.com/chooxide/webmanifest/commit/beb35e1dd6edf1e6cd9415a751e5872bb47e8ef9)] (cargo-release) version 0.2.2 (Yoshua Wuyts)
+- [[`9827f166bc`](https://github.com/chooxide/webmanifest/commit/9827f166bc5702f94e8d62aafd91eb2b04f88163)] theme color (Yoshua Wuyts)
+- [[`e071be5922`](https://github.com/chooxide/webmanifest/commit/e071be5922c606da1a85ff61e65619fa61999675)] Update changelog (Yoshua Wuyts)
+
+### Stats
+```diff
+ CHANGELOG.md | 15 +++++++++++++++
+ Cargo.toml   |  2 +-
+ src/lib.rs   | 23 +++++++++++++++++++++++
+ 3 files changed, 39 insertions(+), 1 deletion(-)
+```
+
+
 ## 2018-10-14, Version 0.2.1
 ### Commits
 - [[`3fc39b72dc`](https://github.com/chooxide/webmanifest/commit/3fc39b72dccfae5edcbca2ff1076968774951e45)] (cargo-release) version 0.2.1 (Yoshua Wuyts)
