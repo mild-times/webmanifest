@@ -114,6 +114,7 @@ pub struct Manifest<'s, 'i, 'r> {
   #[serde(rename = "display")]
   display_mode: Option<DisplayMode>,
   background_color: Option<&'s str>,
+  theme_color: Option<&'s str>,
   description: Option<&'s str>,
   icons: Vec<&'i Icon<'i>>,
   related_applications: Vec<&'r Related<'r>>,
@@ -139,6 +140,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
       start_url: None,
       display_mode: None,
       background_color: None,
+      theme_color: None,
       icons: vec![],
       related_applications: vec![],
     }
@@ -267,6 +269,27 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   #[inline]
   pub fn bg_color(mut self, val: &'s str) -> Self {
     self.background_color = Some(val);
+    self
+  }
+
+  /// Set the `theme_color` value.
+  ///
+  /// ## Example
+  /// ```rust
+  /// # extern crate webmanifest;
+  /// # extern crate failure;
+  /// # use webmanifest::Manifest;
+  /// # fn main() -> Result<(), failure::Error> {
+  /// let name = "My Cool Application";
+  /// let manifest = Manifest::builder(name)
+  ///   .theme_color("#000")
+  ///   .build()?;
+  /// # Ok(())}
+  /// ```
+  #[must_use]
+  #[inline]
+  pub fn theme_color(mut self, val: &'s str) -> Self {
+    self.theme_color = Some(val);
     self
   }
 
