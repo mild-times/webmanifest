@@ -1,6 +1,6 @@
 [package]
 name = "webmanifest"
-version = "0.2.1"
+version = "0.2.2"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/chooxide/webmanifest"
 documentation = "https://docs.rs/webmanifest"
