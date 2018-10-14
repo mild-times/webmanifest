@@ -1,3 +1,28 @@
+## 2018-10-14, Version 1.0.0
+### Commits
+- [[`1b180cdb10`](https://github.com/chooxide/webmanifest/commit/1b180cdb10bb853ddea33aca7997c7739e26fdc1)] (cargo-release) version 1.0.0 (Yoshua Wuyts)
+- [[`0e6deae4c1`](https://github.com/chooxide/webmanifest/commit/0e6deae4c11a163e70c5f85949c355ca215f54f1)] finish up last examples (Yoshua Wuyts)
+- [[`f228d5e29b`](https://github.com/chooxide/webmanifest/commit/f228d5e29b7afbd68acd2b8f836416c213557df6)] scope and more (Yoshua Wuyts)
+- [[`4d08a9d3cd`](https://github.com/chooxide/webmanifest/commit/4d08a9d3cd7ff52d00b8728ba1f4f2a1d6a6c182)] even more APIs (Yoshua Wuyts)
+- [[`bd2f790ed1`](https://github.com/chooxide/webmanifest/commit/bd2f790ed131ca19732c02af2b0ede59580e912f)] more APIs (Yoshua Wuyts)
+- [[`4cfaa93866`](https://github.com/chooxide/webmanifest/commit/4cfaa9386687002a0b6414de987ae5aa83bab121)] split structs (Yoshua Wuyts)
+- [[`d86dacbdfc`](https://github.com/chooxide/webmanifest/commit/d86dacbdfc6a4a2ed8dfc95b9baebfadfd5ad422)] Update changelog (Yoshua Wuyts)
+
+### Stats
+```diff
+ CHANGELOG.md        |  15 +++-
+ Cargo.toml          |   2 +-
+ src/direction.rs    |  30 +++++-
+ src/display_mode.rs |  36 ++++++-
+ src/error.rs        |  80 +--------------
+ src/icon.rs         |  61 ++++++++++-
+ src/lib.rs          | 311 +++++++++++++++++++++++++++++++----------------------
+ src/orientation.rs  |  42 +++++++-
+ src/related.rs      |  38 ++++++-
+ 9 files changed, 407 insertions(+), 208 deletions(-)
+```
+
+
 ## 2018-10-14, Version 0.2.5
 ### Commits
 - [[`ff92a88ca0`](https://github.com/chooxide/webmanifest/commit/ff92a88ca01d8e32bb893cf9694911c988dff22d)] (cargo-release) version 0.2.5 (Yoshua Wuyts)
