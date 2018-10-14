@@ -12,8 +12,6 @@ extern crate serde_json;
 extern crate serde_derive;
 
 use failure::Error;
-use std::ffi::OsStr;
-use std::path::Path;
 
 /// Defines the developers’ preferred display mode for the website.
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -91,12 +89,7 @@ impl<'s> Icon<'s> {
   #[must_use]
   #[inline]
   pub fn new(src: &'s str, sizes: &'s str) -> Self {
-    let ext = Path::new(src)
-      .extension()
-      .and_then(OsStr::to_str)
-      .unwrap_or("");
-    let mime_type = mime_guess::get_mime_type(&ext);
-    let icon_type = format!("{}/{}", mime_type.type_(), mime_type.subtype());
+    let icon_type = mime_guess::guess_mime_type(&src).to_string();
     Self {
       src,
       sizes,
