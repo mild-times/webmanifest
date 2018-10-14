@@ -1,8 +1,24 @@
-#![cfg_attr(feature = "nightly", deny(missing_docs))]
-#![cfg_attr(feature = "nightly", feature(external_doc))]
-#![cfg_attr(feature = "nightly", doc(include = "../README.md"))]
+#![forbid(unsafe_code, missing_debug_implementations, missing_docs)]
 #![cfg_attr(test, deny(warnings))]
-#![forbid(unsafe_code, missing_debug_implementations)]
+
+//! ## Example
+//! ```rust
+//! extern crate webmanifest;
+//! extern crate failure;
+//!
+//! use webmanifest::{Manifest, Related};
+//!
+//! fn main() -> Result<(), failure::Error> {
+//!   let name = "My Cool Application";
+//!   let url = "https://play.google.com/store/apps/details?id=cheeaun.hackerweb";
+//!   let manifest = Manifest::builder(name)
+//!     .short_name("my app")
+//!     .bg_color("#000")
+//!     .related(&Related::new("play", url))
+//!     .build()?;
+//!   Ok(())
+//! }
+//! ```
 
 extern crate failure;
 extern crate mime_guess;
@@ -10,6 +26,8 @@ extern crate serde;
 extern crate serde_json;
 #[macro_use]
 extern crate serde_derive;
+
+use failure::Error;
 
 mod orientation;
 mod related;
@@ -23,7 +41,8 @@ pub use display_mode::DisplayMode;
 pub use related::Related;
 pub use icon::Icon;
 
-use failure::Error;
+/// The MIME type for `.webmanifest` files.
+pub const MIME_TYPE_STR: &'static str = "application/manifest+json";
 
 /// Create a new manifest builder.
 #[derive(Debug, Clone, Serialize)]
