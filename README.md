@@ -11,6 +11,21 @@ Create a `manifest.webmanifest` file.
 ## Examples
 ### Basic
 ```rust
+extern crate webmanifest;
+extern crate failure;
+
+use webmanifest::{Manifest, Related};
+
+fn main() -> Result<(), failure::Error> {
+  let name = "My Cool Application";
+  let url = "https://play.google.com/store/apps/details?id=cheeaun.hackerweb";
+  let manifest = Manifest::builder(name)
+    .short_name("my app")
+    .color("#000")
+    .related(&Related::new("play", url))
+    .build()?;
+  Ok(())
+}
 ```
 
 ## Installation
