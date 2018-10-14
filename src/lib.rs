@@ -13,8 +13,10 @@ extern crate serde_derive;
 
 mod related;
 mod display_mode;
+mod direction;
 mod icon;
 
+pub use direction::Direction;
 pub use display_mode::DisplayMode;
 pub use related::Related;
 pub use icon::Icon;
@@ -34,9 +36,14 @@ pub struct Manifest<'s, 'i, 'r> {
   #[serde(skip_serializing_if = "Option::is_none")]
   background_color: Option<&'s str>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  theme_color: Option<&'s str>,
-  #[serde(skip_serializing_if = "Option::is_none")]
   description: Option<&'s str>,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  #[serde(rename = "dir")]
+  direction: Option<Direction>,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  lang: Option<&'s str>,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  theme_color: Option<&'s str>,
   icons: Vec<&'i Icon<'i>>,
   related_applications: Vec<&'r Related<'r>>,
 }
@@ -60,6 +67,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
       description: None,
       start_url: None,
       display_mode: None,
+      direction: None,
+      lang: None,
       background_color: None,
       theme_color: None,
       icons: vec![],
@@ -236,6 +245,57 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
     self
   }
 
+  /// Set the `lang` value.
+  ///
+  /// Specifies the primary language for the values in the name and short_name
+  /// members. This value is a string containing a single language tag.
+  ///
+  /// ## Example
+  /// ```rust
+  /// # extern crate webmanifest;
+  /// # extern crate failure;
+  /// # use webmanifest::Manifest;
+  /// # fn main() -> Result<(), failure::Error> {
+  /// let name = "My Cool Application";
+  /// let lang = "en-US";
+  /// let manifest = Manifest::builder(name)
+  ///   .lang(lang)
+  ///   .build()?;
+  /// # Ok(())}
+  /// ```
+  #[must_use]
+  #[inline]
+  pub fn lang(mut self, val: &'s str) -> Self {
+    self.lang = Some(val);
+    self
+  }
+
+  /// Set the `dir` value.
+  ///
+  /// Specifies the primary text direction for the name, short_name, and
+  /// description members. Together with the lang member, it helps the correct
+  /// display of right-to-left languages.
+  ///
+  /// ## Example
+  /// ```rust
+  /// # extern crate webmanifest;
+  /// # extern crate failure;
+  /// # use webmanifest::{Manifest, Direction};
+  /// # fn main() -> Result<(), failure::Error> {
+  /// let name = "My Cool Application";
+  /// let lang = "en-US";
+  /// let manifest = Manifest::builder(name)
+  ///   .direction(Direction::Ltr)
+  ///   .build()?;
+  /// # Ok(())}
+  /// ```
+  #[must_use]
+  #[inline]
+  pub fn direction(mut self, val: Direction) -> Self {
+    self.direction = Some(val);
+    self
+  }
+
   /// Add an `Icon` to the icons vector.
   ///
   /// ## Example
@@ -267,7 +327,6 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// # use webmanifest::{Manifest, Related};
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
-  ///
   /// let url = "https://play.google.com/store/apps/details?id=cheeaun.hackerweb";
   /// let manifest = Manifest::builder(name)
   ///   .related(&Related::new("play", url))

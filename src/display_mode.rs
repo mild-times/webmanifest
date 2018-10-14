@@ -1,4 +1,16 @@
 /// Defines the developers’ preferred display mode for the website.
+/// ## Example
+/// ```rust
+/// # extern crate webmanifest;
+/// # extern crate failure;
+/// # use webmanifest::{Manifest, DisplayMode};
+/// # fn main() -> Result<(), failure::Error> {
+/// let name = "My Cool Application";
+/// let manifest = Manifest::builder(name)
+///   .display_mode(DisplayMode::Standalone)
+///   .build()?;
+/// # Ok(())}
+/// ```
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum DisplayMode {
   /// All of the available display area is used and no user agent chrome is
