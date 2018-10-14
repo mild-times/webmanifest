@@ -30,7 +30,7 @@ use mime_guess;
 ///   "type": "image/png"
 /// }],
 /// ```
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Icon<'s> {
   src: &'s str,
   sizes: &'s str,

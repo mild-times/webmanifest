@@ -13,7 +13,7 @@
 ///   "url": "https://play.google.com/store/apps/details?id=cheeaun.hackerweb"
 /// }]
 /// ```
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Related<'s> {
   platform: &'s str,
   url: &'s str,

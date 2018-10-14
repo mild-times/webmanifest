@@ -11,15 +11,18 @@ extern crate serde_json;
 #[macro_use]
 extern crate serde_derive;
 
+mod orientation;
 mod related;
 mod display_mode;
 mod direction;
 mod icon;
 
+pub use orientation::Orientation;
 pub use direction::Direction;
 pub use display_mode::DisplayMode;
 pub use related::Related;
 pub use icon::Icon;
+
 use failure::Error;
 
 /// Create a new manifest builder.
@@ -40,6 +43,8 @@ pub struct Manifest<'s, 'i, 'r> {
   #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(rename = "dir")]
   direction: Option<Direction>,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  orientation: Option<Orientation>,
   #[serde(skip_serializing_if = "Option::is_none")]
   lang: Option<&'s str>,
   #[serde(skip_serializing_if = "Option::is_none")]
@@ -67,6 +72,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
       description: None,
       start_url: None,
       display_mode: None,
+      orientation: None,
       direction: None,
       lang: None,
       background_color: None,
@@ -267,6 +273,32 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   #[inline]
   pub fn lang(mut self, val: &'s str) -> Self {
     self.lang = Some(val);
+    self
+  }
+
+  /// Set the `orientation` value.
+  ///
+  /// Specifies a boolean value that hints for the user agent to indicate to the
+  /// user that the specified native applications are recommended over the
+  /// website. This should only be used if the related native apps really do
+  /// offer something that the website can't.
+  ///
+  /// ## Example
+  /// ```rust
+  /// # extern crate webmanifest;
+  /// # extern crate failure;
+  /// # use webmanifest::{Manifest, Orientation};
+  /// # fn main() -> Result<(), failure::Error> {
+  /// let name = "My Cool Application";
+  /// let manifest = Manifest::builder(name)
+  ///   .orientation(Orientation::Portrait)
+  ///   .build()?;
+  /// # Ok(())}
+  /// ```
+  #[must_use]
+  #[inline]
+  pub fn orientation(mut self, val: Orientation) -> Self {
+    self.orientation = Some(val);
     self
   }
 
