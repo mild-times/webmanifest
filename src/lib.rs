@@ -29,20 +29,20 @@ extern crate serde_derive;
 
 use failure::Error;
 
+mod direction;
+mod display_mode;
+mod icon;
 mod orientation;
 mod related;
-mod display_mode;
-mod direction;
-mod icon;
 
-pub use orientation::Orientation;
 pub use direction::Direction;
 pub use display_mode::DisplayMode;
-pub use related::Related;
 pub use icon::Icon;
+pub use orientation::Orientation;
+pub use related::Related;
 
 /// The MIME type for `.webmanifest` files.
-pub const MIME_TYPE_STR: &'static str = "application/manifest+json";
+pub const MIME_TYPE_STR: &str = "application/manifest+json";
 
 /// Create a new manifest builder.
 #[derive(Debug, Clone, Serialize)]
