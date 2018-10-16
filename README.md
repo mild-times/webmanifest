@@ -9,7 +9,7 @@ Create a `manifest.webmanifest` file.
 - [Releases][releases]
 
 ## Examples
-### Basic
+### Create a new manifest
 ```rust
 extern crate webmanifest;
 extern crate failure;
