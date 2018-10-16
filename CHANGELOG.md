@@ -1,3 +1,18 @@
+## 2018-10-16, Version 1.0.2
+### Commits
+- [[`c9075e2a87`](https://github.com/chooxide/webmanifest/commit/c9075e2a8704b782a8d92164df593415a93608da)] (cargo-release) version 1.0.2 (Yoshua Wuyts)
+- [[`f45de900a3`](https://github.com/chooxide/webmanifest/commit/f45de900a3684e4c649b921d8176ace125e3b0fb)] finish documentation orientations (Yoshua Wuyts)
+- [[`461b656751`](https://github.com/chooxide/webmanifest/commit/461b656751e51c4e5485abb23f09d20e38ad6bd9)] Update changelog (Yoshua Wuyts)
+
+### Stats
+```diff
+ CHANGELOG.md       | 24 ++++++++++++++++++++++++
+ Cargo.toml         |  2 +-
+ src/orientation.rs | 28 ++++++++++++++++++----------
+ 3 files changed, 43 insertions(+), 11 deletions(-)
+```
+
+
 ## 2018-10-16, Version 1.0.1
 ### Commits
 - [[`7e8a98130a`](https://github.com/chooxide/webmanifest/commit/7e8a98130a2f891ec6db3dbd9365286a1670211a)] (cargo-release) version 1.0.1 (Yoshua Wuyts)
