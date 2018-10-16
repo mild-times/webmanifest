@@ -164,9 +164,9 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn short_name(mut self, val: &'s str) -> Self {
-    debug_assert!(val.len() <= 12);
-    self.short_name = Some(val);
+  pub fn short_name(mut self, name: &'s str) -> Self {
+    debug_assert!(name.len() <= 12);
+    self.short_name = Some(name);
     self
   }
 
@@ -186,8 +186,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn start_url(mut self, val: &'s str) -> Self {
-    self.start_url = Some(val);
+  pub fn start_url(mut self, url: &'s str) -> Self {
+    self.start_url = Some(url);
     self
   }
 
@@ -207,8 +207,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn display_mode(mut self, val: DisplayMode) -> Self {
-    self.display_mode = Some(val);
+  pub fn display_mode(mut self, mode: DisplayMode) -> Self {
+    self.display_mode = Some(mode);
     self
   }
 
@@ -228,8 +228,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn bg_color(mut self, val: &'s str) -> Self {
-    self.background_color = Some(val);
+  pub fn bg_color(mut self, color: &'s str) -> Self {
+    self.background_color = Some(color);
     self
   }
 
@@ -249,8 +249,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn theme_color(mut self, val: &'s str) -> Self {
-    self.theme_color = Some(val);
+  pub fn theme_color(mut self, color: &'s str) -> Self {
+    self.theme_color = Some(color);
     self
   }
 
@@ -271,8 +271,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn description(mut self, val: &'s str) -> Self {
-    self.description = Some(val);
+  pub fn description(mut self, desc: &'s str) -> Self {
+    self.description = Some(desc);
     self
   }
 
@@ -296,8 +296,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn lang(mut self, val: &'s str) -> Self {
-    self.lang = Some(val);
+  pub fn lang(mut self, lang: &'s str) -> Self {
+    self.lang = Some(lang);
     self
   }
 
@@ -322,8 +322,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn orientation(mut self, val: Orientation) -> Self {
-    self.orientation = Some(val);
+  pub fn orientation(mut self, orientation: Orientation) -> Self {
+    self.orientation = Some(orientation);
     self
   }
 
@@ -348,8 +348,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn direction(mut self, val: Direction) -> Self {
-    self.direction = Some(val);
+  pub fn direction(mut self, dir: Direction) -> Self {
+    self.direction = Some(dir);
     self
   }
 
@@ -377,8 +377,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn prefer_related_applications(mut self, val: bool) -> Self {
-    self.prefer_related_applications = Some(val);
+  pub fn prefer_related_applications(mut self, prefer: bool) -> Self {
+    self.prefer_related_applications = Some(prefer);
     self
   }
 
@@ -406,8 +406,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn scope(mut self, val: &'s str) -> Self {
-    self.scope = Some(val);
+  pub fn scope(mut self, scope: &'s str) -> Self {
+    self.scope = Some(scope);
     self
   }
 
@@ -428,8 +428,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn icon(mut self, val: &'i Icon) -> Self {
-    self.icons.push(val);
+  pub fn icon(mut self, icon: &'i Icon) -> Self {
+    self.icons.push(icon);
     self
   }
 
@@ -450,8 +450,8 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn related(mut self, val: &'r Related) -> Self {
-    self.related_applications.push(val);
+  pub fn related(mut self, related: &'r Related) -> Self {
+    self.related_applications.push(related);
     self
   }
 }
