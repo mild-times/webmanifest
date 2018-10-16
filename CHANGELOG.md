@@ -1,3 +1,27 @@
+## 2018-10-16, Version 1.0.1
+### Commits
+- [[`7e8a98130a`](https://github.com/chooxide/webmanifest/commit/7e8a98130a2f891ec6db3dbd9365286a1670211a)] (cargo-release) version 1.0.1 (Yoshua Wuyts)
+- [[`996378e846`](https://github.com/chooxide/webmanifest/commit/996378e84651bed5e10ef5ba110aba0044b943a0)] improve arg docs (Yoshua Wuyts)
+- [[`c3ec25e02a`](https://github.com/chooxide/webmanifest/commit/c3ec25e02a5f1cd44fda699f6cbbb1fb071d34b3)] templates (Yoshua Wuyts)
+- [[`ce07f6b77c`](https://github.com/chooxide/webmanifest/commit/ce07f6b77cca48bad126cba562555aebeb992f3f)] document example (Yoshua Wuyts)
+- [[`87b8864812`](https://github.com/chooxide/webmanifest/commit/87b8864812e21e3e680ecd72550f8af10a0ab1ba)] clippy & rustfmt (Yoshua Wuyts)
+- [[`0951293290`](https://github.com/chooxide/webmanifest/commit/095129329074ef9a4f4f9eb91b87c4a1526975a3)] Update changelog (Yoshua Wuyts)
+
+### Stats
+```diff
+ .github/ISSUE_TEMPLATE.md                 | 40 +------------------
+ .github/ISSUE_TEMPLATE/bug_report.md      | 23 +++++++++++-
+ .github/ISSUE_TEMPLATE/feature_request.md | 43 +++++++++++++++++++++-
+ .github/ISSUE_TEMPLATE/question.md        | 18 +++++++++-
+ .travis.yml                               |  4 +-
+ CHANGELOG.md                              | 25 ++++++++++++-
+ Cargo.toml                                |  2 +-
+ README.md                                 |  2 +-
+ src/lib.rs                                | 66 ++++++++++++++++----------------
+ 9 files changed, 150 insertions(+), 73 deletions(-)
+```
+
+
 ## 2018-10-14, Version 1.0.0
 ### Commits
 - [[`1b180cdb10`](https://github.com/chooxide/webmanifest/commit/1b180cdb10bb853ddea33aca7997c7739e26fdc1)] (cargo-release) version 1.0.0 (Yoshua Wuyts)
