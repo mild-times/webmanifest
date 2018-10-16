@@ -1,3 +1,18 @@
+## 2018-10-16, Version 1.0.3
+### Commits
+- [[`aada7660d2`](https://github.com/chooxide/webmanifest/commit/aada7660d2d32834382bf3ea8b15687221475fbc)] (cargo-release) version 1.0.3 (Yoshua Wuyts)
+- [[`1687d8a87b`](https://github.com/chooxide/webmanifest/commit/1687d8a87bc78819c77d2ca5896857f676dbc0a5)] fix typo in enum (Yoshua Wuyts)
+- [[`e4fcb06b97`](https://github.com/chooxide/webmanifest/commit/e4fcb06b974802a7719c329b13416035c22c21b7)] Update changelog (Yoshua Wuyts)
+
+### Stats
+```diff
+ CHANGELOG.md       | 15 +++++++++++++++
+ Cargo.toml         |  2 +-
+ src/orientation.rs |  2 +-
+ 3 files changed, 17 insertions(+), 2 deletions(-)
+```
+
+
 ## 2018-10-16, Version 1.0.2
 ### Commits
 - [[`c9075e2a87`](https://github.com/chooxide/webmanifest/commit/c9075e2a8704b782a8d92164df593415a93608da)] (cargo-release) version 1.0.2 (Yoshua Wuyts)
