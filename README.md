@@ -60,6 +60,6 @@ look at some of these issues:
 [8]: https://docs.rs/webmanifest
 
 [releases]: https://github.com/chooxide/webmanifest/releases
-[contributing]: https://github.com/chooxide/webmanifest/.github/CONTRIBUTING.md
+[contributing]: https://github.com/chooxide/webmanifest/blob/master/.github/CONTRIBUTING.md
 [good-first-issue]: https://github.com/chooxide/webmanifest/labels/good%20first%20issue
 [help-wanted]: https://github.com/chooxide/webmanifest/labels/help%20wanted
