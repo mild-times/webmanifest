@@ -30,7 +30,7 @@ pub enum Orientation {
   /// The screen width is greater than the screen height, and there are multiple
   /// orientations possible. This is the first of those possible orientations.
   #[serde(rename = "landscape-primary")]
-  LandscapPrimary,
+  LandscapePrimary,
   /// The screen width is greater than the screen height, and there are multiple
   /// orientations possible. This is the second of those possible orientations.
   #[serde(rename = "landscape-secondary")]
