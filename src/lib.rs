@@ -45,7 +45,7 @@ pub use related::Related;
 pub const MIME_TYPE_STR: &str = "application/manifest+json";
 
 /// Create a new manifest builder.
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Manifest<'s, 'i, 'r> {
   name: &'s str,
   #[serde(skip_serializing_if = "Option::is_none")]
@@ -72,8 +72,10 @@ pub struct Manifest<'s, 'i, 'r> {
   theme_color: Option<&'s str>,
   #[serde(skip_serializing_if = "Option::is_none")]
   prefer_related_applications: Option<bool>,
-  icons: Vec<&'i Icon<'i>>,
-  related_applications: Vec<&'r Related<'r>>,
+  #[serde(borrow)]
+  icons: Vec<Icon<'i>>,
+  #[serde(borrow)]
+  related_applications: Vec<Related<'r>>,
 }
 
 impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
@@ -429,7 +431,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   #[must_use]
   #[inline]
   pub fn icon(mut self, icon: &'i Icon) -> Self {
-    self.icons.push(icon);
+    self.icons.push(icon.clone());
     self
   }
 
@@ -451,7 +453,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   #[must_use]
   #[inline]
   pub fn related(mut self, related: &'r Related) -> Self {
-    self.related_applications.push(related);
+    self.related_applications.push(related.clone());
     self
   }
 }
