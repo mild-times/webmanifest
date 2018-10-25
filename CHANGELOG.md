@@ -1,3 +1,20 @@
+## 2018-10-25, Version 1.1.0
+### Commits
+- [[`f4a494b955`](https://github.com/chooxide/webmanifest/commit/f4a494b95575a9e96dd8496591ed717b1f8037fe)] (cargo-release) version 1.1.0 (Yoshua Wuyts)
+- [[`b7495ef8a1`](https://github.com/chooxide/webmanifest/commit/b7495ef8a1afd1fc066535579651f3ad1ad0d740)] #1: Derive Deserialize for Manifest (#2) (Marshall Bowers)
+- [[`290e8c7c1e`](https://github.com/chooxide/webmanifest/commit/290e8c7c1ee2dfa4625f95faa77db07aa3c5e92d)] fix link to contributing (Yoshua Wuyts)
+- [[`7debe57332`](https://github.com/chooxide/webmanifest/commit/7debe5733231ba58d49bf5901543eb18d7c643e7)] Update changelog (Yoshua Wuyts)
+
+### Stats
+```diff
+ CHANGELOG.md | 15 +++++++++++++++
+ Cargo.toml   |  2 +-
+ README.md    |  2 +-
+ src/lib.rs   | 12 +++++++-----
+ 4 files changed, 24 insertions(+), 7 deletions(-)
+```
+
+
 ## 2018-10-16, Version 1.0.3
 ### Commits
 - [[`aada7660d2`](https://github.com/chooxide/webmanifest/commit/aada7660d2d32834382bf3ea8b15687221475fbc)] (cargo-release) version 1.0.3 (Yoshua Wuyts)
