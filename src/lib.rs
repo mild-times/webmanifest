@@ -109,6 +109,12 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
     }
   }
 
+  /// Create an instance from a string.
+  pub fn from_str(input: &'s str) -> Result<Self, Error> {
+    let manifest: Self = serde_json::from_str(input)?;
+    Ok(manifest)
+  }
+
   /// Finalize the builder and create the manifest.
   ///
   /// ## Example
