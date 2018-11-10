@@ -1,3 +1,17 @@
+## 2018-11-10, Version 1.1.1
+### Commits
+- [[`b28dd409e5`](https://github.com/rust-net-web/webmanifest/commit/b28dd409e5584931389aa396e926e97ac3821eca)] (cargo-release) version 1.1.1 (Yoshua Wuyts)
+- [[`43a4919334`](https://github.com/rust-net-web/webmanifest/commit/43a491933488ee3fb57aae63683919dd119e9b29)] move to rust-net-web (Yoshua Wuyts)
+- [[`ef8a90f3e3`](https://github.com/rust-net-web/webmanifest/commit/ef8a90f3e34b659eb00fe056d30179d5bcdd016f)] Update changelog (Yoshua Wuyts)
+
+### Stats
+```diff
+ CHANGELOG.md | 17 +++++++++++++++++
+ Cargo.toml   |  4 ++--
+ 2 files changed, 19 insertions(+), 2 deletions(-)
+```
+
+
 ## 2018-10-25, Version 1.1.0
 ### Commits
 - [[`f4a494b955`](https://github.com/chooxide/webmanifest/commit/f4a494b95575a9e96dd8496591ed717b1f8037fe)] (cargo-release) version 1.1.0 (Yoshua Wuyts)
