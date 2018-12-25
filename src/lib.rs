@@ -3,9 +3,6 @@
 
 //! ## Example
 //! ```rust
-//! extern crate webmanifest;
-//! extern crate failure;
-//!
 //! use webmanifest::{Manifest, Related};
 //!
 //! fn main() -> Result<(), failure::Error> {
@@ -28,6 +25,8 @@ extern crate serde_json;
 extern crate serde_derive;
 
 use failure::Error;
+use std::marker::PhantomData;
+use std::str::FromStr;
 
 mod direction;
 mod display_mode;
@@ -46,30 +45,31 @@ pub const MIME_TYPE_STR: &str = "application/manifest+json";
 
 /// Create a new manifest builder.
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Manifest<'s, 'i, 'r> {
-  name: &'s str,
+pub struct Manifest<'a, 'i, 'r> {
+  _input: PhantomData<&'a str>,
+  name: String,
   #[serde(skip_serializing_if = "Option::is_none")]
-  short_name: Option<&'s str>,
+  short_name: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  start_url: Option<&'s str>,
+  start_url: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(rename = "display")]
   display_mode: Option<DisplayMode>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  background_color: Option<&'s str>,
+  background_color: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  description: Option<&'s str>,
+  description: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(rename = "dir")]
   direction: Option<Direction>,
   #[serde(skip_serializing_if = "Option::is_none")]
   orientation: Option<Orientation>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  lang: Option<&'s str>,
+  lang: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  scope: Option<&'s str>,
+  scope: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  theme_color: Option<&'s str>,
+  theme_color: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
   prefer_related_applications: Option<bool>,
   #[serde(borrow)]
@@ -78,7 +78,7 @@ pub struct Manifest<'s, 'i, 'r> {
   related_applications: Vec<Related<'r>>,
 }
 
-impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
+impl<'a, 'i, 'r> Manifest<'a, 'i, 'r> {
   /// Create a new instance.
   ///
   /// ## Example
@@ -90,8 +90,9 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn builder(name: &'s str) -> Self {
+  pub fn builder(name: String) -> Self {
     Self {
+      _input: PhantomData,
       name,
       short_name: None,
       description: None,
@@ -107,12 +108,6 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
       icons: vec![],
       related_applications: vec![],
     }
-  }
-
-  /// Create an instance from a string.
-  pub fn from_str(input: &'s str) -> Result<Self, Error> {
-    let manifest: Self = serde_json::from_str(input)?;
-    Ok(manifest)
   }
 
   /// Finalize the builder and create the manifest.
@@ -172,7 +167,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn short_name(mut self, name: &'s str) -> Self {
+  pub fn short_name(mut self, name: String) -> Self {
     debug_assert!(name.len() <= 12);
     self.short_name = Some(name);
     self
@@ -194,7 +189,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn start_url(mut self, url: &'s str) -> Self {
+  pub fn start_url(mut self, url: String) -> Self {
     self.start_url = Some(url);
     self
   }
@@ -236,7 +231,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn bg_color(mut self, color: &'s str) -> Self {
+  pub fn bg_color(mut self, color: String) -> Self {
     self.background_color = Some(color);
     self
   }
@@ -257,7 +252,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn theme_color(mut self, color: &'s str) -> Self {
+  pub fn theme_color(mut self, color: String) -> Self {
     self.theme_color = Some(color);
     self
   }
@@ -279,7 +274,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn description(mut self, desc: &'s str) -> Self {
+  pub fn description(mut self, desc: String) -> Self {
     self.description = Some(desc);
     self
   }
@@ -304,7 +299,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn lang(mut self, lang: &'s str) -> Self {
+  pub fn lang(mut self, lang: String) -> Self {
     self.lang = Some(lang);
     self
   }
@@ -414,7 +409,7 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   /// ```
   #[must_use]
   #[inline]
-  pub fn scope(mut self, scope: &'s str) -> Self {
+  pub fn scope(mut self, scope: String) -> Self {
     self.scope = Some(scope);
     self
   }
@@ -462,4 +457,13 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
     self.related_applications.push(related.clone());
     self
   }
+
+  //   fn from_str(input: &'a str) -> Result<Self, Error> {
+  //     let manifest: Self = serde_json::from_str(&input)?;
+  //     Ok(manifest)
+  //   }
 }
+
+// impl<'a, 'i, 'r> FromStr for Manifest<'a, 'i, 'r> {
+//   type Err = Error;
+// }

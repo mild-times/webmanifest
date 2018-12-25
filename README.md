@@ -11,9 +11,6 @@ Create a `manifest.webmanifest` file.
 ## Examples
 ### Create a new manifest
 ```rust
-extern crate webmanifest;
-extern crate failure;
-
 use webmanifest::{Manifest, Related};
 
 fn main() -> Result<(), failure::Error> {
