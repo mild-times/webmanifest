@@ -26,7 +26,7 @@ extern crate serde_derive;
 
 use failure::Error;
 use std::marker::PhantomData;
-use std::str::FromStr;
+// use std::str::FromStr;
 
 mod direction;
 mod display_mode;
@@ -34,11 +34,11 @@ mod icon;
 mod orientation;
 mod related;
 
-pub use direction::Direction;
-pub use display_mode::DisplayMode;
-pub use icon::Icon;
-pub use orientation::Orientation;
-pub use related::Related;
+pub use crate::direction::Direction;
+pub use crate::display_mode::DisplayMode;
+pub use crate::icon::Icon;
+pub use crate::orientation::Orientation;
+pub use crate::related::Related;
 
 /// The MIME type for `.webmanifest` files.
 pub const MIME_TYPE_STR: &str = "application/manifest+json";
