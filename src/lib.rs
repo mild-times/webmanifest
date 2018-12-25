@@ -25,8 +25,6 @@ extern crate serde_json;
 extern crate serde_derive;
 
 use failure::Error;
-use std::marker::PhantomData;
-// use std::str::FromStr;
 
 mod direction;
 mod display_mode;
@@ -45,8 +43,7 @@ pub const MIME_TYPE_STR: &str = "application/manifest+json";
 
 /// Create a new manifest builder.
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Manifest<'a, 'i, 'r> {
-  _input: PhantomData<&'a str>,
+pub struct Manifest<'i, 'r> {
   name: String,
   #[serde(skip_serializing_if = "Option::is_none")]
   short_name: Option<String>,
@@ -78,7 +75,7 @@ pub struct Manifest<'a, 'i, 'r> {
   related_applications: Vec<Related<'r>>,
 }
 
-impl<'a, 'i, 'r> Manifest<'a, 'i, 'r> {
+impl<'i, 'r> Manifest<'i, 'r> {
   /// Create a new instance.
   ///
   /// ## Example
@@ -92,7 +89,6 @@ impl<'a, 'i, 'r> Manifest<'a, 'i, 'r> {
   #[inline]
   pub fn builder(name: String) -> Self {
     Self {
-      _input: PhantomData,
       name,
       short_name: None,
       description: None,
@@ -457,13 +453,4 @@ impl<'a, 'i, 'r> Manifest<'a, 'i, 'r> {
     self.related_applications.push(related.clone());
     self
   }
-
-  //   fn from_str(input: &'a str) -> Result<Self, Error> {
-  //     let manifest: Self = serde_json::from_str(&input)?;
-  //     Ok(manifest)
-  //   }
 }
-
-// impl<'a, 'i, 'r> FromStr for Manifest<'a, 'i, 'r> {
-//   type Err = Error;
-// }
