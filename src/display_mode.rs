@@ -1,12 +1,10 @@
 /// Defines the developers’ preferred display mode for the website.
 /// ## Example
 /// ```rust
-/// # extern crate webmanifest;
-/// # extern crate failure;
 /// # use webmanifest::{Manifest, DisplayMode};
 /// # fn main() -> Result<(), failure::Error> {
 /// let name = "My Cool Application";
-/// let manifest = Manifest::builder(name)
+/// let manifest = Manifest::builder(name.into())
 ///   .display_mode(DisplayMode::Standalone)
 ///   .build()?;
 /// # Ok(())}

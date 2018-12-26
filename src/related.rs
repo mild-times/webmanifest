@@ -24,7 +24,6 @@ impl<'s> Related<'s> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
   /// # use webmanifest::Related;
   /// let platform = "play";
   /// let url = "https://play.google.com/store/apps/details?id=cheeaun.hackerweb";
