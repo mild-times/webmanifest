@@ -52,14 +52,14 @@ look at some of these issues:
 
 [1]: https://img.shields.io/crates/v/webmanifest.svg?style=flat-square
 [2]: https://crates.io/crates/webmanifest
-[3]: https://img.shields.io/travis/chooxide/webmanifest.svg?style=flat-square
-[4]: https://travis-ci.org/chooxide/webmanifest
+[3]: https://img.shields.io/travis/http-rs/webmanifest.svg?style=flat-square
+[4]: https://travis-ci.org/http-rs/webmanifest
 [5]: https://img.shields.io/crates/d/webmanifest.svg?style=flat-square
 [6]: https://crates.io/crates/webmanifest
 [7]: https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square
 [8]: https://docs.rs/webmanifest
 
-[releases]: https://github.com/chooxide/webmanifest/releases
-[contributing]: https://github.com/chooxide/webmanifest/blob/master/.github/CONTRIBUTING.md
-[good-first-issue]: https://github.com/chooxide/webmanifest/labels/good%20first%20issue
-[help-wanted]: https://github.com/chooxide/webmanifest/labels/help%20wanted
+[releases]: https://github.com/http-rs/webmanifest/releases
+[contributing]: https://github.com/http-rs/webmanifest/blob/main/.github/CONTRIBUTING.md
+[good-first-issue]: https://github.com/http-rs/webmanifest/labels/good%20first%20issue
+[help-wanted]: https://github.com/http-rs/webmanifest/labels/help%20wanted
