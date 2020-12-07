@@ -3,25 +3,20 @@
 
 //! ## Example
 //! ```rust
-//! extern crate webmanifest;
-//! extern crate failure;
-//!
 //! use webmanifest::{Manifest, Related};
 //!
 //! fn main() -> Result<(), failure::Error> {
 //!   let name = "My Cool Application";
 //!   let url = "https://play.google.com/store/apps/details?id=cheeaun.hackerweb";
-//!   let manifest = Manifest::builder(name)
-//!     .short_name("my app")
-//!     .bg_color("#000")
+//!   let manifest = Manifest::builder(name.into())
+//!     .short_name("my app".into())
+//!     .bg_color("#000".into())
 //!     .related(&Related::new("play", url))
 //!     .build()?;
 //!   Ok(())
 //! }
 //! ```
 
-extern crate failure;
-extern crate mime_guess;
 extern crate serde;
 extern crate serde_json;
 #[macro_use]
@@ -35,41 +30,41 @@ mod icon;
 mod orientation;
 mod related;
 
-pub use direction::Direction;
-pub use display_mode::DisplayMode;
-pub use icon::Icon;
-pub use orientation::Orientation;
-pub use related::Related;
+pub use crate::direction::Direction;
+pub use crate::display_mode::DisplayMode;
+pub use crate::icon::Icon;
+pub use crate::orientation::Orientation;
+pub use crate::related::Related;
 
 /// The MIME type for `.webmanifest` files.
 pub const MIME_TYPE_STR: &str = "application/manifest+json";
 
 /// Create a new manifest builder.
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Manifest<'s, 'i, 'r> {
-  name: &'s str,
+pub struct Manifest<'i, 'r> {
+  name: String,
   #[serde(skip_serializing_if = "Option::is_none")]
-  short_name: Option<&'s str>,
+  short_name: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  start_url: Option<&'s str>,
+  start_url: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(rename = "display")]
   display_mode: Option<DisplayMode>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  background_color: Option<&'s str>,
+  background_color: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  description: Option<&'s str>,
+  description: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
   #[serde(rename = "dir")]
   direction: Option<Direction>,
   #[serde(skip_serializing_if = "Option::is_none")]
   orientation: Option<Orientation>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  lang: Option<&'s str>,
+  lang: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  scope: Option<&'s str>,
+  scope: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
-  theme_color: Option<&'s str>,
+  theme_color: Option<String>,
   #[serde(skip_serializing_if = "Option::is_none")]
   prefer_related_applications: Option<bool>,
   #[serde(borrow)]
@@ -78,19 +73,18 @@ pub struct Manifest<'s, 'i, 'r> {
   related_applications: Vec<Related<'r>>,
 }
 
-impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
+impl<'i, 'r> Manifest<'i, 'r> {
   /// Create a new instance.
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
   /// # use webmanifest::Manifest;
   /// let name = "My Cool Application";
-  /// let builder = Manifest::builder(name);
+  /// let builder = Manifest::builder(name.into());
   /// ```
   #[must_use]
   #[inline]
-  pub fn builder(name: &'s str) -> Self {
+  pub fn builder(name: String) -> Self {
     Self {
       name,
       short_name: None,
@@ -113,12 +107,10 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::Manifest;
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
-  /// let manifest = Manifest::builder(name).build()?;
+  /// let manifest = Manifest::builder(name.into()).build()?;
   /// # Ok(())}
   /// ```
   #[must_use]
@@ -132,12 +124,10 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::Manifest;
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
-  /// let manifest = Manifest::builder(name).pretty()?;
+  /// let manifest = Manifest::builder(name.into()).pretty()?;
   /// # Ok(())}
   /// ```
   #[must_use]
@@ -154,21 +144,19 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::Manifest;
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
-  /// let manifest = Manifest::builder(name)
-  ///   .short_name("Cool App")
+  /// let manifest = Manifest::builder(name.into())
+  ///   .short_name("Cool App".into())
   ///   .build()?;
   /// # Ok(())}
   /// ```
   #[must_use]
   #[inline]
-  pub fn short_name(mut self, name: &'s str) -> Self {
+  pub fn short_name(mut self, name: String) -> Self {
     debug_assert!(name.len() <= 12);
-    self.short_name = Some(name);
+    self.short_name = Some(name.into());
     self
   }
 
@@ -176,19 +164,17 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::Manifest;
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
-  /// let manifest = Manifest::builder(name)
-  ///   .start_url(".")
+  /// let manifest = Manifest::builder(name.into())
+  ///   .start_url(".".into())
   ///   .build()?;
   /// # Ok(())}
   /// ```
   #[must_use]
   #[inline]
-  pub fn start_url(mut self, url: &'s str) -> Self {
+  pub fn start_url(mut self, url: String) -> Self {
     self.start_url = Some(url);
     self
   }
@@ -197,12 +183,10 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::{Manifest, DisplayMode};
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
-  /// let manifest = Manifest::builder(name)
+  /// let manifest = Manifest::builder(name.into())
   ///   .display_mode(DisplayMode::Standalone)
   ///   .build()?;
   /// # Ok(())}
@@ -218,19 +202,17 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::Manifest;
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
-  /// let manifest = Manifest::builder(name)
-  ///   .bg_color("#000")
+  /// let manifest = Manifest::builder(name.into())
+  ///   .bg_color("#000".into())
   ///   .build()?;
   /// # Ok(())}
   /// ```
   #[must_use]
   #[inline]
-  pub fn bg_color(mut self, color: &'s str) -> Self {
+  pub fn bg_color(mut self, color: String) -> Self {
     self.background_color = Some(color);
     self
   }
@@ -239,19 +221,17 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::Manifest;
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
-  /// let manifest = Manifest::builder(name)
-  ///   .theme_color("#000")
+  /// let manifest = Manifest::builder(name.into())
+  ///   .theme_color("#000".into())
   ///   .build()?;
   /// # Ok(())}
   /// ```
   #[must_use]
   #[inline]
-  pub fn theme_color(mut self, color: &'s str) -> Self {
+  pub fn theme_color(mut self, color: String) -> Self {
     self.theme_color = Some(color);
     self
   }
@@ -260,20 +240,18 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::Manifest;
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
   /// let desc = "It does many things.";
-  /// let manifest = Manifest::builder(name)
-  ///   .description(desc)
+  /// let manifest = Manifest::builder(name.into())
+  ///   .description(desc.into())
   ///   .build()?;
   /// # Ok(())}
   /// ```
   #[must_use]
   #[inline]
-  pub fn description(mut self, desc: &'s str) -> Self {
+  pub fn description(mut self, desc: String) -> Self {
     self.description = Some(desc);
     self
   }
@@ -285,20 +263,18 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::Manifest;
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
   /// let lang = "en-US";
-  /// let manifest = Manifest::builder(name)
-  ///   .lang(lang)
+  /// let manifest = Manifest::builder(name.into())
+  ///   .lang(lang.into())
   ///   .build()?;
   /// # Ok(())}
   /// ```
   #[must_use]
   #[inline]
-  pub fn lang(mut self, lang: &'s str) -> Self {
+  pub fn lang(mut self, lang: String) -> Self {
     self.lang = Some(lang);
     self
   }
@@ -312,12 +288,10 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::{Manifest, Orientation};
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
-  /// let manifest = Manifest::builder(name)
+  /// let manifest = Manifest::builder(name.into())
   ///   .orientation(Orientation::Portrait)
   ///   .build()?;
   /// # Ok(())}
@@ -337,13 +311,11 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::{Manifest, Direction};
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
   /// let lang = "en-US";
-  /// let manifest = Manifest::builder(name)
+  /// let manifest = Manifest::builder(name.into())
   ///   .direction(Direction::Ltr)
   ///   .build()?;
   /// # Ok(())}
@@ -367,12 +339,10 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::{Manifest, Direction};
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
-  /// let manifest = Manifest::builder(name)
+  /// let manifest = Manifest::builder(name.into())
   ///   .prefer_related_applications(true)
   ///   .build()?;
   /// # Ok(())}
@@ -396,19 +366,17 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::{Manifest, Direction};
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
-  /// let manifest = Manifest::builder(name)
-  ///   .scope("/myapp/")
+  /// let manifest = Manifest::builder(name.into())
+  ///   .scope("/myapp/".into())
   ///   .build()?;
   /// # Ok(())}
   /// ```
   #[must_use]
   #[inline]
-  pub fn scope(mut self, scope: &'s str) -> Self {
+  pub fn scope(mut self, scope: String) -> Self {
     self.scope = Some(scope);
     self
   }
@@ -417,13 +385,11 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::{Manifest, Icon};
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
   /// let src = "images/touch/homescreen48.png";
-  /// let manifest = Manifest::builder(name)
+  /// let manifest = Manifest::builder(name.into())
   ///   .icon(&Icon::new(&src, "48x48"))
   ///   .build()?;
   /// # Ok(())}
@@ -439,13 +405,11 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
   ///
   /// ## Example
   /// ```rust
-  /// # extern crate webmanifest;
-  /// # extern crate failure;
   /// # use webmanifest::{Manifest, Related};
   /// # fn main() -> Result<(), failure::Error> {
   /// let name = "My Cool Application";
   /// let url = "https://play.google.com/store/apps/details?id=cheeaun.hackerweb";
-  /// let manifest = Manifest::builder(name)
+  /// let manifest = Manifest::builder(name.into())
   ///   .related(&Related::new("play", url))
   ///   .build()?;
   /// # Ok(())}
@@ -457,3 +421,12 @@ impl<'s, 'i, 'r> Manifest<'s, 'i, 'r> {
     self
   }
 }
+
+// impl<'i, 'r> std::str::FromStr for &Manifest<'i, 'r> {
+//   type Err = Error;
+
+//   fn from_str(s: &str) -> Result<Self, Self::Err> {
+//     let manifest: Manifest = serde_json::from_str(s)?;
+//     Ok(&manifest)
+//   }
+// }

@@ -7,6 +7,7 @@ documentation = "https://docs.rs/webmanifest"
 description = "Create a manifest.webmanifest file"
 authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
 readme = "README.md"
+edition = "2018"
 
 [dependencies]
 serde = "1.0.79"

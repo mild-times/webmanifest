@@ -3,13 +3,11 @@
 ///
 /// ## Example
 /// ```rust
-/// # extern crate webmanifest;
-/// # extern crate failure;
 /// # use webmanifest::{Manifest, Direction};
 /// # fn main() -> Result<(), failure::Error> {
 /// let name = "My Cool Application";
 /// let lang = "en-US";
-/// let manifest = Manifest::builder(name)
+/// let manifest = Manifest::builder(name.into())
 ///   .direction(Direction::Ltr)
 ///   .build()?;
 /// # Ok(())}
